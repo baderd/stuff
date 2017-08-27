@@ -54,7 +54,9 @@ for(j in 1:ncol(all_pairs)){
             ]
     }
 }
-minbill
+
+#+ results='show'
+print(minbill)
 
 #'
 #' ## Find transitive debts to reduce number of transactions
