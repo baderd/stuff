@@ -44,6 +44,7 @@ p <- plot_ly(dt, x=~Year, y=~Total) %>%
         title = 'Inflation in Germany',
         yaxis=list(title='Inflation [%]')
     )
+#+ fig.width=10
 p
 
 #' Use Mouse to zoom into data!  
