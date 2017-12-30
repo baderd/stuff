@@ -1,13 +1,21 @@
 #' ---
 #' title: Inflation
+#' author: Daniel Bader
+#' output: html_notebook
 #' ---
 #' 
 
-library(data.table)
-library(plotly)
+suppressPackageStartupMessages({
+    library(data.table)
+    library(plotly)
+})
+#' Load data about inflation in Germany from 
+#' [statbureau.org](https://www.statbureau.org/en/germany/inflation-tables)
+#' 
+dt <- fread('../../data/germany.inflation.monthly-year-over-year.csv')
 
-dt <- fread('data/germany.inflation.monthly-year-over-year.csv')
-
+#' Compute 5 year average with sliding window and step size of 1 year.
+#' 
 lowy <- min(dt$Year)
 rangey <- 5
 highy <- lowy + rangey
@@ -20,6 +28,8 @@ while(highy <= max(dt$Year)){
     highy <- highy + 1
 }
 
+#' Plot interactively
+#' 
 p <- plot_ly(dt, x=~Year, y=~Total) %>%
     add_markers(name='By year') %>% 
     add_lines(
@@ -35,7 +45,8 @@ p <- plot_ly(dt, x=~Year, y=~Total) %>%
         yaxis=list(title='Inflation [%]')
     )
 p
-    
+
+#' Use Mouse to zoom into data!  
 
 #+ END
 #'
