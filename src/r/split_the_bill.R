@@ -107,3 +107,36 @@ minbill[order(trans_diff, decreasing = T)]
 
 
 
+### 
+### Mark Heron's code
+### 
+
+personen <- names(sort(tapply(minbill$diff, minbill$schuldner, FUN=sum)))
+
+minbill[,"trans_diff"] <- minbill[,"diff"]
+
+print(minbill)
+
+for(per in personen) {
+    
+    while( with(minbill, sum(trans_diff[zahler==per]) > 0 & sum(trans_diff[schuldner==per]) >0) ) {
+        
+        tmp_von <- with(minbill, schuldner[zahler==per & trans_diff >0])[1]
+        tmp_zu <- with(minbill, zahler[schuldner==per & trans_diff >0])[1]
+        
+        von_zeile <- with(minbill, which(schuldner== tmp_von & zahler==per))
+        zu_zeile <- with(minbill, which(zahler== tmp_zu & schuldner==per))
+        direkt_zeile <- with(minbill, which(schuldner== tmp_von & zahler== tmp_zu))
+        
+        betrag <- with(minbill, min(trans_diff[von_zeile], trans_diff[zu_zeile]))
+        
+        minbill[von_zeile, "trans_diff"] <- minbill[von_zeile, "trans_diff"] - betrag
+        minbill[zu_zeile, "trans_diff"] <- minbill[zu_zeile, "trans_diff"] - betrag
+        minbill[direkt_zeile, "trans_diff"] <- minbill[direkt_zeile, "trans_diff"] + betrag
+        
+        print(minbill)
+        print("")
+    }
+}
+
+

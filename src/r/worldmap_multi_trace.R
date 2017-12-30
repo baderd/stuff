@@ -35,11 +35,11 @@ p <- plot_ly(
     geo= list(scope='world'),
     updatemenus = list(list(
         buttons = list(
-            list(method = "update",
+            list(
                 args = list("visible", list(TRUE, FALSE)),
                 label = "2012"
             ),
-            list(method = "update",
+            list(
                 args = list("visible", list(FALSE, TRUE)),
                 label = "2013"
             )
