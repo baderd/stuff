@@ -17,11 +17,11 @@ dt <- fread('../../data/germany.inflation.monthly-year-over-year.csv')
 #' Compute 5 year average with sliding window and step size of 1 year.
 #' 
 lowy <- min(dt$Year)
-rangey <- 5
+rangey <- 4
 highy <- lowy + rangey
 avgwin <- c()
 while(highy <= max(dt$Year)){
-    midy <- mean(lowy, highy)
+    midy <- (lowy + highy)/2
     infl <- mean(dt[lowy <= Year & Year <= highy, Total])
     avgwin <- rbind(avgwin, c(midy, infl))
     lowy <- lowy + 1
