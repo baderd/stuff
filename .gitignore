@@ -6,3 +6,4 @@ stuff.Rproj
 .DS_Store
 README.html
 data
+.httr-oauth

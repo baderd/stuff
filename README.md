@@ -7,3 +7,4 @@ To view the HTMLs visit my
 
 Content:
 - [inflation plot](https://baderd.github.io/stuff/src/r/inflation.nb.html)
+- [wedding drinks](https://baderd.github.io/stuff/src/r/wedding_drinks.html)
