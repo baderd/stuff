@@ -16,6 +16,8 @@ opts_chunk$set(message = F, warning = F, echo = F)
 # constants
 file_drinks <- "~/Documents/getraenke_konsum.csv"
 colors_wedding <- c("skyblue", "#4C7EF0")
+dir_plot <- "/Users/Bader.Daniel/Google Drive/susidani/2018-06-16_unsere_hochzeit/"
+
 # helper
 theme_wedding <- function(){
     theme_bw() +
@@ -70,7 +72,7 @@ p <- ggplot(tab[1:15], aes(x = Getraenk, y = Anzahl, fill = Alkoholisch))+
     scale_fill_manual(values = colors_wedding)
 #+
 p
-
+ggsave(filename = file.path(dir_plot, "drinks_top15.png"), plot = p)
 
 #'
 #' # Volumen
@@ -85,10 +87,11 @@ drinks[,
     keyby = .(Alkoholisch)
     ]
 
+
 #' ## Mehr Alkohl oder Wasser?
 #+
 tab <- unique(drinks[, .(Alkoholisch, volumen_pro_alkohol)])
-plot_ly(data = tab) %>%
+p <- plot_ly(data = tab) %>%
     add_pie(
         values = ~volumen_pro_alkohol, text = ~Alkoholisch, 
         insidetextfont = list(color = 'black', size = 22),
@@ -97,9 +100,17 @@ plot_ly(data = tab) %>%
         )
     ) %>% 
     layout(
-        title = "Alkoholanteil nach Volumen", titlefont = list(size = 26),
-        margin = list(t = 60)
+        title = "Gesamtvolumen nach Alkoholanteil", 
+        titlefont = list(size = 26),
+        margin = list(t = 50, r = 5, l = 5, b = 5)
     )
+p
+#+ 
+devnull <- export(p = p, 
+    file = file.path(dir_plot, "drinks_alcohol_percent.png"), 
+    vwidth = 500, vheight = 400
+    )
+
 
 #' ## Nach Kategorie
 #+
