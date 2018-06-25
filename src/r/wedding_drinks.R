@@ -16,7 +16,7 @@ opts_chunk$set(message = F, warning = F, echo = F)
 # constants
 file_drinks <- "~/Documents/getraenke_konsum.csv"
 colors_wedding <- c("skyblue", "#4C7EF0")
-dir_plot <- "/Users/Bader.Daniel/Google Drive/susidani/2018-06-16_unsere_hochzeit/"
+
 
 # helper
 theme_wedding <- function(){
