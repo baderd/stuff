@@ -16,12 +16,13 @@ opts_chunk$set(message = F, warning = F, echo = F)
 # constants
 file_drinks <- "~/Documents/getraenke_konsum.csv"
 colors_wedding <- c("skyblue", "#4C7EF0")
-
+dir_plot <- ""
 
 # helper
 theme_wedding <- function(){
-    theme_bw() +
-    theme(
+    res <- theme(
+        panel.background = element_rect(fill = "white", colour = NA),
+        legend.key = element_rect(fill = "white", colour = NA),
         text = element_text(size = 20),
         panel.grid = element_blank(),
         panel.border = element_blank(),
@@ -29,7 +30,8 @@ theme_wedding <- function(){
         panel.grid.major.y = element_line(color = "darkgray"),
         legend.position = "top",
         legend.direction = "horizontal"
-        )
+    )
+    return(res)
 }
 
 #' 
@@ -68,8 +70,9 @@ tab <- drinks[
 p <- ggplot(tab[1:15], aes(x = Getraenk, y = Anzahl, fill = Alkoholisch))+
     geom_col() +
     theme_wedding() +
-    labs(x = "Top 15 Getraenke") +
-    scale_fill_manual(values = colors_wedding)
+    labs(x = "", title = "Top 15 Getränke") +
+    scale_fill_manual(values = colors_wedding) +
+    theme(plot.title = element_text(hjust = 0.5))
 #+
 p
 ggsave(filename = file.path(dir_plot, "drinks_top15.png"), plot = p)
