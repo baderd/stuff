@@ -1,0 +1,98 @@
+---
+title: "Summary MQSS18"
+output: html_document
+author: dbader
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+# Sunday
+
+Matthias Mann
+
+- many bioRxiv papers 2018
+- BoxCar paper: Meier, ..., Mann 2018 Nature methods
+- Overcome TMT ratio compression with EASI-tag: 
+  Virreira-Winter 2018 Nature methods
+- Protocol for PPX: EasyPhos Liu, Schwarzer, Mann Science 2018
+- PLOT: for GO-terms P-value vs enrichment factor --> semi-volcano plot
+
+
+Luis Serrano: Small proteins (in bacterial genomes)
+
+- total-omics of M. pneumoniae
+- detection of peptides < 30aa difficult in MS (~5% loss with 2 unique peptides)
+- "RanSep" to predict smallORFs 
+- smallORFs are as conserved as large ORFs --> function?
+- many small ORFS are essential
+
+# Monday
+
+- Christoforou 2016 Nature communications: ratio compression solution
+  --> slow only top5 (?)
+- SILAC-TMT Savitski 2018 Cell
+- Imputation: recommended for LFQ analysis after filtering reliably expressed,
+  impute by down-shifted normal distribution
+- QCloud (Chiva 2018 PlosONE): quality control over time, 
+  local installations soon
+
+Questions
+
+- Do we use proteinGroup qValue and SPM-FDR 
+  to filter high-quality identifications
+- Use proteomic ruler for absolute quantification
+- Use fast LFQ
+
+
+# Tuesday
+
+- CSharp version of HTSeq, but orders of magnitude faster on github
+- Sinitcyn, Cox 2018
+- Aebersold shows log2 intensity
+
+
+# Wednesday
+
+- GeneNames are derived from entry headers of fasta database file; 
+  e.g. field "GN=CDC9"
+- "re-quantify" option only for SILAC
+- Metabolomics in MQ coming soon
+- DeepMass: Prism for DIA data on github
+
+
+# Thursday
+
+- Talk: Joshua Coon
+- Impute data for PCA
+
+Computational PTM proteomics
+
+- nice overview slide from Dan Ithzak
+- p21: only adjacent fractions are matched with each other
+- also scatter plot of PX vs PPX changes
+- PLOT: Z-scores of PX/PPX with posthoc t-test qValues
+- PPX-id in proteinGroups: "PhosphoID"
+- treat _1, _2, _3 as different "proteins" of same ids of the same sample 
+    - new unique_id column
+    - introduce mutliplicity column
+    - filter ids for 2/3 expressed
+    - impute
+- match to GO by leading protein
+- "Modified Sequence": shows where PTMs are, good for _2 and _3
+
+# Friday
+
+- use Uniprot release number
+- position specific disease variant annotaion in uniprot
+- PHOTON by J. Rudolph: PPI+PPX for signalling network; paper + github
+
+Current Development
+
+- mzTab format as MQ output
+- Andromeda 2.0
+- Match betw. runs for TMT
+- "Top-Down MaxQuant" as new program --> allow plugins for MQ like Perseus
+- MQ for distributed memory systems for high performance computing
+
